@@ -1,0 +1,49 @@
+{
+  "name": "draggable-ui",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "watch": "tsc && vite build --watch",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "check:ts": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "date-fns": ">=3.6.0",
+    "react": ">=18.2.0",
+    "react-dom": ">=18.2.0",
+    "zustand": ">=4.5.2"
+  },
+  "devDependencies": {
+    "@types/lodash-es": "^4.17.12",
+    "@types/node": "^20.14.10",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rollup-plugin-visualizer": "^5.12.0",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0",
+    "vite-plugin-dts": "^3.9.1",
+    "zustand": "^4.5.2"
+  },
+  "dependencies": {
+    "@tabler/icons-react": "^3.10.0",
+    "lodash-es": "^4.17.21",
+    "styled-components": "^6.1.13"
+  }
+}
