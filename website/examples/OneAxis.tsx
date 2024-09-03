@@ -1,13 +1,22 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
 import { DragBox } from "../../website/DragBox";
 import { useDraggable } from "../../src";
 import { Preview } from "../Preview";
+import { getCenterPosition } from "../../src/helpers/position";
 
 export const OneAxis = () => {
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [dragging, setDragging] = useState(false);
   const [axis, setAxis] = useState("x");
+
+  const boxRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!boxRef.current || !containerRef.current) return;
+    setPos(getCenterPosition(boxRef.current, containerRef.current));
+  }, []);
 
   const { listeners } = useDraggable({
     onStart: () => {
@@ -31,10 +40,10 @@ export const OneAxis = () => {
 
   return (
     <Preview
-      title="OneAxis"
-      description="OneAxis"
+      title="One Axis"
+      description="Drag an element along only one axis at a time."
       content={
-        <>
+        <Content ref={containerRef}>
           <Switch>
             <Button $active={axis === "x"} onClick={() => setAxis("x")}>
               X axis
@@ -44,6 +53,7 @@ export const OneAxis = () => {
             </Button>
           </Switch>
           <DragBox
+            ref={boxRef}
             {...listeners}
             data-dragging={dragging}
             style={{
@@ -52,11 +62,15 @@ export const OneAxis = () => {
           >
             {dragging ? "..." : " Drag Me!"}
           </DragBox>
-        </>
+        </Content>
       }
     />
   );
 };
+
+const Content = styled.div`
+  height: 100%;
+`;
 
 const Switch = styled.div`
   position: absolute;

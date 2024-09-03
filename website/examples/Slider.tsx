@@ -35,7 +35,7 @@ export const Slider = () => {
   return (
     <StyledPreview
       title="Slider"
-      description="Slider"
+      description="Simple example of a slider component."
       content={
         <Track
           ref={ref}

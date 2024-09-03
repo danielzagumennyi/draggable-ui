@@ -5,6 +5,7 @@ import { OneAxis } from "./examples/OneAxis";
 import { Slider } from "./examples/Slider";
 import { SnapToGrid } from "./examples/SnapToGrid";
 import { DragHandle } from "./examples/DragHandle";
+import { Widget } from "./examples/Widget";
 
 export const GlobalStyle = createGlobalStyle`
   *,
@@ -16,6 +17,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     position: relative;
     min-width: 320px;
     margin: 0;
@@ -44,6 +46,7 @@ function App() {
         <BoundsByParent />
         <Slider />
         <DragHandle />
+        <Widget />
       </Container>
     </>
   );
@@ -56,7 +59,7 @@ const Header = styled.header`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 48px;
+  gap: 16px;
 `;
 
 const Title = styled.h1`
@@ -74,6 +77,7 @@ const Container = styled.div`
   grid-template-columns: 1fr 1fr;
   flex-direction: column;
   gap: 24px;
+  padding: 48px 0;
 `;
 
 export default App;

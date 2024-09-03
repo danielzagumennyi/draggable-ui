@@ -1,11 +1,9 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { DragBox } from "../../website/DragBox";
-import { useDraggable } from "../../src";
+import { Coordinates, useDraggable } from "../../src";
 import { Preview } from "../Preview";
-
-const roundToNearest = (num: number, num2: number) =>
-  Math.round(num / num2) * num2;
+import { getCenterPosition, snapToGrid } from "../../src/helpers/position";
 
 const gridSize = 20;
 
@@ -14,16 +12,31 @@ export const SnapToGrid = () => {
   const [startPos, setStartPos] = useState({ x: 0, y: 0 });
   const [dragging, setDragging] = useState(false);
 
+  const boxRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!boxRef.current || !containerRef.current) return;
+    setPos(
+      snapToGrid(
+        getCenterPosition(boxRef.current, containerRef.current),
+        gridSize
+      )
+    );
+  }, []);
+
   const { listeners } = useDraggable({
     onStart: () => {
       setDragging(true);
       setStartPos(pos);
     },
     onMove: ({ deltaX, deltaY }) => {
-      setPos({
-        x: roundToNearest(startPos.x + deltaX, gridSize),
-        y: roundToNearest(startPos.y + deltaY, gridSize),
-      });
+      const coords: Coordinates = {
+        x: startPos.x + deltaX,
+        y: startPos.y + deltaY,
+      };
+
+      setPos(snapToGrid(coords, gridSize));
     },
     onEnd: () => {
       setDragging(false);
@@ -32,22 +45,29 @@ export const SnapToGrid = () => {
 
   return (
     <StyledPreview
-      title="SnapToGrid"
-      description="SnapToGrid"
+      title="Snap to Grid"
+      description="Binding the movement of an element to the grid."
       content={
-        <DragBox
-          {...listeners}
-          data-dragging={dragging}
-          style={{
-            transform: `translate(${pos.x}px, ${pos.y}px)`,
-          }}
-        >
-          {dragging ? "..." : " Drag Me!"}
-        </DragBox>
+        <Content ref={containerRef}>
+          <DragBox
+            ref={boxRef}
+            {...listeners}
+            data-dragging={dragging}
+            style={{
+              transform: `translate(${pos.x}px, ${pos.y}px)`,
+            }}
+          >
+            {dragging ? "..." : " Drag Me!"}
+          </DragBox>
+        </Content>
       }
     />
   );
 };
+
+const Content = styled.div`
+  height: 100%;
+`;
 
 const StyledPreview = styled(Preview)`
   ${Preview.Content} {

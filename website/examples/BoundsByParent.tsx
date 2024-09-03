@@ -1,8 +1,11 @@
-import { clamp } from "lodash-es";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { DragBox } from "../../website/DragBox";
 import { useDraggable } from "../../src";
+import {
+  boundByContainer,
+  getCenterPosition,
+} from "../../src/helpers/position";
+import { DragBox } from "../../website/DragBox";
 import { Preview } from "../Preview";
 
 export const BoundsByParent = () => {
@@ -10,8 +13,13 @@ export const BoundsByParent = () => {
   const [startPos, setStartPos] = useState({ x: 0, y: 0 });
   const [dragging, setDragging] = useState(false);
 
-  const parentRef = useRef<HTMLDivElement>(null);
   const boxRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!boxRef.current || !containerRef.current) return;
+    setPos(getCenterPosition(boxRef.current, containerRef.current));
+  }, []);
 
   const { listeners } = useDraggable({
     onStart: () => {
@@ -19,14 +27,18 @@ export const BoundsByParent = () => {
       setStartPos(pos);
     },
     onMove: ({ deltaX, deltaY }) => {
-      const parentRect = parentRef.current?.getBoundingClientRect();
-      const boxRect = boxRef.current?.getBoundingClientRect();
-      const maxWidth = (parentRect?.width || 0) - (boxRect?.width || 0);
-      const maxHeight = (parentRect?.height || 0) - (boxRect?.height || 0);
-      setPos({
-        x: clamp(startPos.x + deltaX, 0, maxWidth),
-        y: clamp(startPos.y + deltaY, 0, maxHeight),
-      });
+      if (!boxRef.current || !containerRef.current) return;
+
+      setPos(
+        boundByContainer(
+          {
+            x: startPos.x + deltaX,
+            y: startPos.y + deltaY,
+          },
+          boxRef.current,
+          containerRef.current
+        )
+      );
     },
     onEnd: () => {
       setDragging(false);
@@ -35,10 +47,10 @@ export const BoundsByParent = () => {
 
   return (
     <Preview
-      title="BoundsByParent"
-      description="BoundsByParent"
+      title="Bounds by Parent"
+      description="The element's movement is limited by the parent's area."
       content={
-        <Parent ref={parentRef}>
+        <Content ref={containerRef}>
           <DragBox
             ref={boxRef}
             {...listeners}
@@ -49,12 +61,12 @@ export const BoundsByParent = () => {
           >
             {dragging ? "..." : " Drag Me!"}
           </DragBox>
-        </Parent>
+        </Content>
       }
     />
   );
 };
 
-const Parent = styled.div`
+const Content = styled.div`
   height: 100%;
 `;

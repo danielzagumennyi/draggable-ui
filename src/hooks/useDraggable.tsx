@@ -22,9 +22,15 @@ type UseDraggableProps = {
   onStart?: (data: DragEventData) => void;
   onMove?: (data: DragEventData) => void;
   onEnd?: (data: DragEventData) => void;
+  grabCursor?: string;
 };
 
-export const useDraggable = ({ onStart, onMove, onEnd }: UseDraggableProps) => {
+export const useDraggable = ({
+  onStart,
+  onMove,
+  onEnd,
+  grabCursor = "grabbing",
+}: UseDraggableProps) => {
   const startCoords = useRef<Coordinates>({ x: 0, y: 0 });
   const prevCoords = useRef<Coordinates>({ x: 0, y: 0 });
 
@@ -86,6 +92,8 @@ export const useDraggable = ({ onStart, onMove, onEnd }: UseDraggableProps) => {
     document.addEventListener("pointermove", handleMove);
     document.addEventListener("pointerup", handleEnd);
     document.addEventListener("contextmenu", handleEnd);
+
+    document.body.style.cursor = grabCursor;
 
     onStart?.({
       deltaX: 0,
