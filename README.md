@@ -10,7 +10,7 @@ npm i draggable-ui
 
 ### useDraggable Hook
 
-The `useDraggable` hook is a custom React hook designed to add draggable functionality to any component. It provides an interface to track and manage drag events, including the start, movement, and end of a drag operation. This hook abstracts away the complexity of handling pointer events and provides an easy-to-use API for implementing drag-and-drop functionality.
+The `useDraggable` hook is a custom React hook designed to add draggable functionality to any component. It provides an interface to track and manage drag events, including the start, movement, and end of a drag operation.
 
 #### Example
 
