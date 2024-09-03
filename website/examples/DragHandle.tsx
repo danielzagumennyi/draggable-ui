@@ -9,17 +9,10 @@ import { Preview } from "../Preview";
 
 export const DragHandle = () => {
   const [pos, setPos] = useState<Coordinates>({ x: 0, y: 0 });
-  const [dragging, setDragging] = useState(false);
 
   const { listeners } = useDraggable({
-    onStart: () => {
-      setDragging(true);
-    },
     onMove: ({ moveX, moveY }) => {
       setPos((prev) => ({ x: prev.x + moveX, y: prev.y + moveY }));
-    },
-    onEnd: () => {
-      setDragging(false);
     },
   });
 
@@ -36,7 +29,7 @@ export const DragHandle = () => {
         >
           <Button {...listeners}>
             <IconArrowsMaximize size={14} />
-            {dragging ? "..." : "Drag Handle"}
+            Drag Handle
           </Button>
         </StyledDragBox>
       }

@@ -11,16 +11,13 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "watch": "tsc && vite build --watch",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "build:website": "tsc && vite build --config vite.website.config.ts",
     "preview": "vite preview",
     "check:ts": "tsc --noEmit"
   },
   "peerDependencies": {
-    "date-fns": ">=3.6.0",
     "react": ">=18.2.0",
-    "react-dom": ">=18.2.0",
-    "zustand": ">=4.5.2"
+    "react-dom": ">=18.2.0"
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.12",
@@ -39,11 +36,8 @@
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
     "vite-plugin-dts": "^3.9.1",
-    "zustand": "^4.5.2"
-  },
-  "dependencies": {
+    "styled-components": "^6.1.13",
     "@tabler/icons-react": "^3.10.0",
-    "lodash-es": "^4.17.21",
-    "styled-components": "^6.1.13"
+    "lodash-es": "^4.17.21"
   }
 }

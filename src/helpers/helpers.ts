@@ -1,8 +1,7 @@
-import { isNumber } from "lodash-es";
 import { Coordinates } from "../types";
 
 export const isNumberValue = (value: unknown): value is number => {
-  return isNumber(value) && !isNaN(value);
+  return typeof value === "number" && !isNaN(value);
 };
 
 export const getRelativeMousePosition = (
