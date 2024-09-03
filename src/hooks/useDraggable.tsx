@@ -12,6 +12,8 @@ export type DragEventData = {
   moveX: number;
   /** Change in the Y coordinate compared to the previous value. */
   moveY: number;
+  /** X and Y coordinates for mouse and touch events. */
+  coords: Coordinates;
   /** Pointer event associated with the movement. */
   event: PointerEvent;
 };
@@ -44,6 +46,7 @@ export const useDraggable = ({ onStart, onMove, onEnd }: UseDraggableProps) => {
       event,
       moveX,
       moveY,
+      coords,
     });
   });
 
@@ -69,6 +72,7 @@ export const useDraggable = ({ onStart, onMove, onEnd }: UseDraggableProps) => {
       moveX,
       moveY,
       event,
+      coords,
     });
   });
 
@@ -89,6 +93,7 @@ export const useDraggable = ({ onStart, onMove, onEnd }: UseDraggableProps) => {
       moveX: 0,
       moveY: 0,
       event: event.nativeEvent,
+      coords,
     });
   });
 
