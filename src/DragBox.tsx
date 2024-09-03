@@ -18,6 +18,5 @@ export const DragBox = styled.div`
 
   &[data-dragging="true"] {
     background-color: tomato;
-    cursor: grabbing;
   }
 `;

@@ -3,24 +3,26 @@ import { getEventCoordinates } from "../helpers/coordinates/getEventCoordinates"
 import { Coordinates } from "../helpers/coordinates/types";
 import { useEvent } from "./useEvent";
 
-export type EventData = {
+export type DragEventData = {
+  /** Total distance traveled along the X axis. */
   deltaX: number;
+  /** Total distance traveled along the Y axis. */
   deltaY: number;
+  /** Change in the X coordinate compared to the previous value. */
   moveX: number;
+  /** Change in the Y coordinate compared to the previous value. */
   moveY: number;
+  /** Pointer event associated with the movement. */
   event: PointerEvent;
-  coords: Coordinates;
 };
 
-export const useDraggable = ({
-  onStart,
-  onMove,
-  onEnd,
-}: {
-  onStart?: (data: EventData) => void;
-  onMove?: (data: EventData) => void;
-  onEnd?: (data: EventData) => void;
-}) => {
+type UseDraggableProps = {
+  onStart?: (data: DragEventData) => void;
+  onMove?: (data: DragEventData) => void;
+  onEnd?: (data: DragEventData) => void;
+};
+
+export const useDraggable = ({ onStart, onMove, onEnd }: UseDraggableProps) => {
   const startCoords = useRef<Coordinates>({ x: 0, y: 0 });
   const prevCoords = useRef<Coordinates>({ x: 0, y: 0 });
 
@@ -37,7 +39,6 @@ export const useDraggable = ({
     prevCoords.current = coords;
 
     onMove?.({
-      coords,
       deltaX,
       deltaY,
       event,
@@ -58,9 +59,11 @@ export const useDraggable = ({
 
     document.removeEventListener("pointermove", handleMove);
     document.removeEventListener("pointerup", handleEnd);
+    document.removeEventListener("contextmenu", handleEnd);
+
+    document.body.style.cursor = "";
 
     onEnd?.({
-      coords,
       deltaX,
       deltaY,
       moveX,
@@ -78,9 +81,9 @@ export const useDraggable = ({
 
     document.addEventListener("pointermove", handleMove);
     document.addEventListener("pointerup", handleEnd);
+    document.addEventListener("contextmenu", handleEnd);
 
     onStart?.({
-      coords,
       deltaX: 0,
       deltaY: 0,
       moveX: 0,

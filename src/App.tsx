@@ -4,6 +4,7 @@ import { BoundsByParent } from "./examples/BoundsByParent";
 import { OneAxis } from "./examples/OneAxis";
 import { Slider } from "./examples/Slider";
 import { SnapToGrid } from "./examples/SnapToGrid";
+import { DragHandle } from "./examples/DragHandle";
 
 export const GlobalStyle = createGlobalStyle`
   *,
@@ -42,6 +43,7 @@ function App() {
         <OneAxis />
         <BoundsByParent />
         <Slider />
+        <DragHandle />
       </Container>
     </>
   );
