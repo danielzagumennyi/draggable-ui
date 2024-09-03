@@ -2,7 +2,7 @@ import { clamp } from "lodash-es";
 import { useRef, useState } from "react";
 
 import styled from "styled-components";
-import { useDraggable } from "../hooks/useDraggable";
+import { useDraggable } from "../../src";
 import { Preview } from "../Preview";
 
 const size = 24;

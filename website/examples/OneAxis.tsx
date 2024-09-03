@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled, { css } from "styled-components";
-import { useDraggable } from "../hooks/useDraggable";
-import { DragBox } from "../DragBox";
+import { DragBox } from "../../website/DragBox";
+import { useDraggable } from "../../src";
 import { Preview } from "../Preview";
 
 export const OneAxis = () => {

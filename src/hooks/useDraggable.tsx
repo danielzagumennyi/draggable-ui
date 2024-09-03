@@ -1,6 +1,6 @@
 import { DragEventHandler, useCallback, useRef } from "react";
 import { getEventCoordinates } from "../helpers/coordinates/getEventCoordinates";
-import { Coordinates } from "../helpers/coordinates/types";
+import { Coordinates } from "../types";
 import { useEvent } from "./useEvent";
 
 export type DragEventData = {

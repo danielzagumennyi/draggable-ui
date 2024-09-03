@@ -7,7 +7,9 @@ import { resolve } from "path";
 export default defineConfig({
   plugins: [
     react(),
-    dts(),
+    dts({
+      include: "src",
+    }),
     visualizer({
       gzipSize: true,
       brotliSize: true,

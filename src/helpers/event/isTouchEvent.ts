@@ -1,4 +1,4 @@
-import { getWindow } from "../execution-context/getWindow";
+import { getWindow } from "../executionContext/getWindow";
 
 export function isTouchEvent(
   event: Event | undefined | null

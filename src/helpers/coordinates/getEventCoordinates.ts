@@ -1,6 +1,6 @@
 import { hasViewportRelativeCoordinates } from "../event/hasViewportRelativeCoordinates";
 import { isTouchEvent } from "../event/isTouchEvent";
-import type { Coordinates } from "./types";
+import type { Coordinates } from "../../types";
 
 /**
  * Returns the normalized x and y coordinates for mouse and touch events.

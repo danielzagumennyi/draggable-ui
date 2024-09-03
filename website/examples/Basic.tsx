@@ -1,9 +1,8 @@
 import { useState } from "react";
 
-import { useDraggable } from "../hooks/useDraggable";
-import { Coordinates } from "../helpers/coordinates/types";
+import { DragBox } from "../../website/DragBox";
+import { Coordinates, useDraggable } from "../../src";
 import { Preview } from "../Preview";
-import { DragBox } from "../DragBox";
 
 export const Basic = () => {
   const [pos, setPos] = useState<Coordinates>({ x: 0, y: 0 });

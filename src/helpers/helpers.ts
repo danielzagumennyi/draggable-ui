@@ -1,5 +1,5 @@
 import { isNumber } from "lodash-es";
-import { Coordinates } from "./coordinates/types";
+import { Coordinates } from "../types";
 
 export const isNumberValue = (value: unknown): value is number => {
   return isNumber(value) && !isNaN(value);

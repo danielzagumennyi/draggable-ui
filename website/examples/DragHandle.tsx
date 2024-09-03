@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-import { DragBox } from "../DragBox";
-import { Coordinates } from "../helpers/coordinates/types";
-import { useDraggable } from "../hooks/useDraggable";
-import { Preview } from "../Preview";
+import { DragBox } from "../../website/DragBox";
+
 import styled from "styled-components";
 import { IconArrowsMaximize } from "@tabler/icons-react";
+import { Coordinates, useDraggable } from "../../src";
+import { Preview } from "../Preview";
 
 export const DragHandle = () => {
   const [pos, setPos] = useState<Coordinates>({ x: 0, y: 0 });
