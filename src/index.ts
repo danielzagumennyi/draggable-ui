@@ -3,3 +3,4 @@ export * from "./hooks/useEvent";
 export * from "./hooks/useRect";
 export * from "./types";
 export * from "./helpers/position";
+export * from "./components/StickyWidget";

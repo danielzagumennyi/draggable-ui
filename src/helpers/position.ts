@@ -69,3 +69,10 @@ export const snapToGrid = (coords: Coordinates, gridSize: number) => {
 
 const roundToNearest = (num: number, num2: number) =>
   Math.round(num / num2) * num2;
+
+export const setOffset = (coords: Coordinates, offset: number): Coordinates => {
+  return {
+    x: clamp(coords.x, offset, coords.x - offset),
+    y: clamp(coords.y, offset, coords.y - offset),
+  };
+};

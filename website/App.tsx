@@ -1,11 +1,13 @@
 import styled, { createGlobalStyle } from "styled-components";
+import { StickyWidget } from "../src/components/StickyWidget";
 import { Basic } from "./examples/Basic";
 import { BoundsByParent } from "./examples/BoundsByParent";
+import { DragHandle } from "./examples/DragHandle";
 import { OneAxis } from "./examples/OneAxis";
 import { Slider } from "./examples/Slider";
 import { SnapToGrid } from "./examples/SnapToGrid";
-import { DragHandle } from "./examples/DragHandle";
 import { Widget } from "./examples/Widget";
+import { IconBallBasketball } from "@tabler/icons-react";
 
 export const GlobalStyle = createGlobalStyle`
   *,
@@ -48,9 +50,22 @@ function App() {
         <DragHandle />
         <Widget />
       </Container>
+      <StickyWidget>
+        <WidgetCircle>
+          <IconBallBasketball size={48} strokeWidth={1} />
+        </WidgetCircle>
+      </StickyWidget>
     </>
   );
 }
+
+const WidgetCircle = styled.div`
+  border-radius: 48px;
+  width: 48px;
+  height: 48px;
+  color: white;
+  background-color: tomato;
+`;
 
 const Header = styled.header`
   height: 500px;
@@ -74,10 +89,10 @@ const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   flex-direction: column;
   gap: 24px;
-  padding: 48px 0;
+  padding: 48px 16px;
 `;
 
 export default App;
