@@ -70,9 +70,29 @@ export const snapToGrid = (coords: Coordinates, gridSize: number) => {
 const roundToNearest = (num: number, num2: number) =>
   Math.round(num / num2) * num2;
 
-export const setOffset = (coords: Coordinates, offset: number): Coordinates => {
+export const setOffset = (
+  coords: Coordinates,
+  element: Element,
+  container: Element,
+  offset: number
+): Coordinates => {
+  const boxRect = element.getBoundingClientRect();
+  const containerRect = container.getBoundingClientRect();
+
   return {
     x: clamp(coords.x, offset, coords.x - offset),
-    y: clamp(coords.y, offset, coords.y - offset),
+    y: clamp(coords.y, offset, containerRect.height - boxRect.height - offset),
+  };
+};
+
+export const getPercent = (
+  coords: Coordinates,
+  container: Element
+): Coordinates => {
+  const { left, width, height, top } = container.getBoundingClientRect();
+
+  return {
+    x: clamp((coords.x - left) / width, 0, 1) * 100,
+    y: clamp((coords.y - top) / height, 0, 1) * 100,
   };
 };
